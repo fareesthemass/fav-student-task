@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Navbar from "./components/Navbar"
+import { createContext, useState } from "react"
+import Try from './Contextprovider'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Fav from "./Fav"
+const Arrcontext = createContext()
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [arr, setarr] = useState(['hasan', 'farees', 'hussain', 'ali'])
+    const [fav, setfav] = useState([])
+    return (
+        <><BrowserRouter>
+            <Arrcontext.Provider value={{ arr, setarr, fav, setfav }}>
+                <Routes>
+
+                    <Route path="/" element={[<Navbar></Navbar>,<Try/>]}></Route>
+<Route path="fav" element={[<Navbar></Navbar>,<Fav></Fav>]}></Route>
+
+                </Routes>
+            </Arrcontext.Provider>
+        </BrowserRouter>
+        </>)
 }
 
-export default App;
+export default App
+export { Arrcontext }
